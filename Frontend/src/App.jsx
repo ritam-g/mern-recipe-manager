@@ -5,9 +5,10 @@ import Navbar from './styles/components/Navbar'
 function App() {
   return (
     <main
-      className='h-screen w-screen px-[calc(var(--space-md)*6)] py-[calc(var(--space-md)*2)] bg-[rgb(var(--surface))] text-[rgb(var(--text))]
+      className='h-screen w-screen px-[calc(var(--space-md)*6)] py-[calc(var(--space-md)*2)] bg-[rgb(var(--surface))] text-[rgb(var(--text))] *:
+      overflow-y-scroll overflow-x-hidden
     '>
-      <Navbar/>
+      <Navbar />
       <Mainroutes />
     </main>
   )
