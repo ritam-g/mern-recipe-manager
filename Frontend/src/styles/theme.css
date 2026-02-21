@@ -1,0 +1,13 @@
+:root {
+  /* 🎨 Brand Colors */
+  --color-primary: 34 197 94;
+  --color-secondary: 59 130 246;
+  --color-bg: 30 41 59;
+  --color-text: 248 250 252;
+
+  /* 📏 Radius */
+  --radius-main: 12px;
+
+  /* 🔤 Font */
+  --font-main: 'Inter', sans-serif;
+}

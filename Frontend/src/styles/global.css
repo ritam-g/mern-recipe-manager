@@ -1,0 +1,8 @@
+@import "./variables.css";
+@import "tailwindcss";
+
+body {
+  font-family: var(--font-main);
+  background-color: rgb(var(--bg));
+  color: rgb(var(--text));
+}
