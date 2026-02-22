@@ -92,4 +92,12 @@
     /* width */
     --normal-width:1rem;
     --wide-width:1.5rem;
+
+     /* padding   */
+
+     --padding-lg:10px;
+     --padding-md:5px;
+
+
+
 }

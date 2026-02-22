@@ -26,12 +26,12 @@ function RecipeCard({
       "
             >
                 {/* Image Section */}
-                <div className="relative h-52 overflow-hidden bg-[rgb(var(--surface-light))]">
+                <div className="relative p-[var(--padding-lg)]  w-[calc(var(--normal-width)*15)] overflow-hidden bg-[rgb(var(--surface-light))] ">
                     <img
                         src={image}
                         alt={title}
                         className="
-            w-full h-full object-cover
+            w-full h-full object-cover rounded-2xl
             transition-transform duration-500
             group-hover:scale-105
           "

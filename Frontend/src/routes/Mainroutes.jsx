@@ -13,7 +13,7 @@ function Mainroutes() {
             <Route path='/about' element={<About />} />
             <Route path='/recipes' element={<Recipes />} />
             <Route path='/create' element={<Create />} />
-            <Route path='/recipe/details/:parms' element={<SingleRecipe />} />
+            <Route path='/recipe/details/:id' element={<SingleRecipe />} />
         </Routes>
     )
 }
