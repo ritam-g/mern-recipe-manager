@@ -1,13 +1,13 @@
 import React, { useContext } from 'react'
 import { recipes } from '../context/RecipeProvider'
+import RecipeCard from '../components/RecipeCard'
 
 function Recipes() {
  const {data}= useContext(recipes)
+ 
   return (
-    <section>
-      {data.map((recipe,idx)=>{
-        return <div key={idx}>{recipe.id}</div>
-      })}
+    <section className='  '>
+     {data.length>0? data.map((recipe)=><RecipeCard key={recipe.id} {...recipe} />) : 'no recipes found'}
     </section>
   )
 }

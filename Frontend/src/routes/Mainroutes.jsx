@@ -4,6 +4,7 @@ import Home from '../pages/Home'
 import About from '../pages/About'
 import Recipes from '../pages/Recipes'
 import Create from '../pages/Create'
+import SingleRecipe from '../components/SingleRecipe'
 
 function Mainroutes() {
     return (
@@ -12,6 +13,7 @@ function Mainroutes() {
             <Route path='/about' element={<About />} />
             <Route path='/recipes' element={<Recipes />} />
             <Route path='/create' element={<Create />} />
+            <Route path='/recipe/details/:parms' element={<SingleRecipe />} />
         </Routes>
     )
 }

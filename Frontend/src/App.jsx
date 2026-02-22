@@ -1,7 +1,8 @@
 import React from 'react'
 import { ToastContainer } from "react-toastify"
 import Mainroutes from './routes/Mainroutes'
-import Navbar from './styles/components/Navbar'
+import Navbar from './components/Navbar'
+
 function App() {
   return (
     <main

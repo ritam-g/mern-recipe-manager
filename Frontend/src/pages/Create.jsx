@@ -2,139 +2,172 @@ import { nanoid } from "nanoid";
 import React, { useContext } from "react";
 import { useForm } from "react-hook-form";
 import { recipes } from "../context/RecipeProvider";
-
+import {toast} from 'react-toastify'
+import { useNavigate } from "react-router-dom";
 function Create() {
+ const navigate=useNavigate()
   const {
     register,
     handleSubmit,
     formState: { errors },
     reset
   } = useForm();
-  const {data,setdata} = useContext(recipes);
-  const onSubmit = async (obj) => {
-    obj.id=nanoid()
-    await setdata([...data,obj])
-    console.log(data);
-    reset()
+
+  const { data, setdata } = useContext(recipes);
+
+  const onSubmit = (obj) => {
+    obj.id = nanoid();
+    setdata([...data, obj]);
+    toast.success("New recipe crearted")
+    navigate("/recipes")
+    reset();
   };
+  console.log(data);
+  
+  const inputStyle =
+    "w-full bg-[rgb(var(--input-bg))] border border-[rgb(var(--input-border))] " +
+    "rounded-[var(--radius-md)] px-[var(--space-md)] py-[var(--space-sm)] " +
+    "text-[rgb(var(--text))] placeholder:text-[rgb(var(--text-muted))] " +
+    "focus:border-[rgb(var(--primary))] focus:ring-2 focus:ring-[rgb(var(--primary-soft))] " +
+    "outline-none transition-all duration-300";
 
-  const fieldWrapper = "relative flex flex-col gap-1";
-
-  const inputBase =
-    "w-full bg-transparent outline-none py-[var(--space-sm)] " +
-    "text-[rgb(var(--text))] placeholder:text-[rgb(var(--text-muted))]";
-
-  const underline =
-    "border-b border-[rgb(var(--border-color))] " +
-    "focus:border-[rgb(var(--primary))] transition-all duration-300";
+  const labelStyle =
+    "text-[var(--text-sm)] text-[rgb(var(--text-muted))] font-medium";
 
   const errorText =
-    "text-[rgb(var(--error))] text-[var(--text-xs)]";
+    "text-[rgb(var(--error))] text-[var(--text-xs)] mt-1";
 
   return (
-    <div className="flex justify-center mt-[var(--space-xl)]">
-      <form
-        onSubmit={handleSubmit(onSubmit)}
-        className="w-[420px] flex flex-col gap-[var(--space-md)]"
+    <div className="min-h-screen bg-[rgb(var(--bg))] flex items-center justify-center px-4 py-4 rounded-2xl">
+      <div
+        className="
+        w-full max-w-xl
+        bg-[rgb(var(--surface))]
+        rounded-[var(--radius-lg)]
+        shadow-[var(--shadow-lg)]
+        p-[var(--space-xl)]
+        border border-[rgb(var(--border-color))]
+      "
       >
-
-        {/* Image URL */}
-        <div className={fieldWrapper}>
-          <input
-            type="text"
-            placeholder="Enter Image URL"
-            {...register("image", { required: "Image URL is required" })}
-            className={`${inputBase} ${underline}`}
-          />
-          {errors.image && (
-            <p className={errorText}>{errors.image.message}</p>
-          )}
-        </div>
-
-        {/* Title */}
-        <div className={fieldWrapper}>
-          <input
-            type="text"
-            placeholder="Recipe Title"
-            {...register("title", { required: "Title is required" })}
-            className={`${inputBase} ${underline}`}
-          />
-          {errors.title && (
-            <p className={errorText}>{errors.title.message}</p>
-          )}
-        </div>
-
-        {/* Ingredients */}
-        <div className={fieldWrapper}>
-          <textarea
-            rows="2"
-            placeholder="// write ingredients separated by comma"
-            {...register("ingredients", { required: "Ingredients required" })}
-            className={`${inputBase} ${underline} resize-none`}
-          />
-          {errors.ingredients && (
-            <p className={errorText}>{errors.ingredients.message}</p>
-          )}
-        </div>
-
-        {/* Instructions */}
-        <div className={fieldWrapper}>
-          <textarea
-            rows="2"
-            placeholder="// write instructions separated by comma"
-            {...register("instructions", { required: "Instructions required" })}
-            className={`${inputBase} ${underline} resize-none`}
-          />
-          {errors.instructions && (
-            <p className={errorText}>{errors.instructions.message}</p>
-          )}
-        </div>
-        {/* Chief NAmw */}
-        <div className={fieldWrapper}>
-          <textarea
-            rows="2"
-            placeholder="// write chief Name separated by comma"
-            {...register("Chief", { required: "Chief required" })}
-            className={`${inputBase} ${underline} resize-none`}
-          />
-          {errors.instructions && (
-            <p className={errorText}>{errors.instructions.message}</p>
-          )}
-        </div>
-
-        {/* Category */}
-        <div className={fieldWrapper}>
-          <select
-            {...register("category", { required: true })}
-            className={`${inputBase} ${underline} cursor-pointer`}
-          >
-            <option value="">Select Category</option>
-            <option value="breakfast">Breakfast</option>
-            <option value="lunch">Lunch</option>
-            <option value="dinner">Dinner</option>
-          </select>
-        </div>
-
-        {/* Button */}
-        <button
-          type="submit"
+        <h2
           className="
-            mt-[var(--space-md)]
-            bg-[rgb(var(--surface-light))]
-            hover:bg-[rgb(var(--primary))]
-            active:scale-95
-            transition-all duration-300
-            py-[10px]
-            rounded-[var(--radius-md)]
-            text-[rgb(var(--text))]
-            font-medium
-            shadow-[var(--shadow-sm)]
-            hover:shadow-[var(--shadow-md)]
-          "
+          text-[var(--text-xl)]
+          font-bold
+          text-[rgb(var(--text))]
+          mb-[var(--space-lg)]
+          text-center
+        "
         >
-          Save Recipe
-        </button>
-      </form>
+          Create New Recipe 🍳
+        </h2>
+
+        <form
+          onSubmit={handleSubmit(onSubmit)}
+          className="flex flex-col gap-[var(--space-md)]"
+        >
+
+          {/* Image */}
+          <div>
+            <label className={labelStyle}>Image URL</label>
+            <input
+              type="text"
+              placeholder="Paste image link..."
+              {...register("image", { required: "Image URL is required" })}
+              className={inputStyle}
+            />
+            {errors.image && <p className={errorText}>{errors.image.message}</p>}
+          </div>
+
+          {/* Title */}
+          <div>
+            <label className={labelStyle}>Recipe Title</label>
+            <input
+              type="text"
+              placeholder="Enter recipe title"
+              {...register("title", { required: "Title is required" })}
+              className={inputStyle}
+            />
+            {errors.title && <p className={errorText}>{errors.title.message}</p>}
+          </div>
+
+          {/* Ingredients */}
+          <div>
+            <label className={labelStyle}>Ingredients</label>
+            <textarea
+              rows="3"
+              placeholder="Separate ingredients with comma"
+              {...register("ingredients", { required: "Ingredients required" })}
+              className={`${inputStyle} resize-none`}
+            />
+            {errors.ingredients && (
+              <p className={errorText}>{errors.ingredients.message}</p>
+            )}
+          </div>
+
+          {/* Instructions */}
+          <div>
+            <label className={labelStyle}>Instructions</label>
+            <textarea
+              rows="3"
+              placeholder="Separate steps with comma"
+              {...register("instructions", { required: "Instructions required" })}
+              className={`${inputStyle} resize-none`}
+            />
+            {errors.instructions && (
+              <p className={errorText}>{errors.instructions.message}</p>
+            )}
+          </div>
+
+          {/* Chef Name */}
+          <div>
+            <label className={labelStyle}>Chef Name</label>
+            <input
+              type="text"
+              placeholder="Enter chef name"
+              {...register("chef", { required: "Chef name required" })}
+              className={inputStyle}
+            />
+            {errors.chef && <p className={errorText}>{errors.chef.message}</p>}
+          </div>
+
+          {/* Category */}
+          <div>
+            <label className={labelStyle}>Category</label>
+            <select
+              {...register("category", { required: "Category required" })}
+              className={`${inputStyle} cursor-pointer`}
+            >
+              <option value="">Select category</option>
+              <option value="breakfast">Breakfast</option>
+              <option value="lunch">Lunch</option>
+              <option value="dinner">Dinner</option>
+            </select>
+            {errors.category && (
+              <p className={errorText}>{errors.category.message}</p>
+            )}
+          </div>
+
+          {/* Button */}
+          <button
+            type="submit"
+            className="
+              mt-[var(--space-md)]
+              bg-[rgb(var(--primary))]
+              hover:bg-[rgb(var(--primary-dark))]
+              text-white
+              py-[var(--space-sm)]
+              rounded-[var(--radius-md)]
+              font-semibold
+              shadow-[var(--shadow-md)]
+              active:scale-95
+              transition-all duration-300
+            "
+          >
+            Save Recipe
+          </button>
+
+        </form>
+      </div>
     </div>
   );
 }
